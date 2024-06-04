@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixed Juice</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+    <header class="container center">
+        <h1>Mixed Juice</h1>
+
+    </header>
+    <hr>
+    <main class="container">
+        <h3>1. Determine how long it takes to mix juices</h3>
+        <hr>
+
+        <select id="juices">
+            <option value="Pure Strawberry Joy">Pure Strawberry Joy</option>
+            <option value="Energizer">Energizer</option>
+            <option value="Green Garden">Green Garden</option>
+            <option value="Tropical Island">Tropical Island</option>
+            <option value="All or Nothing">All or Nothing</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <input type="number" id="wedges" placeholder="Number of wedges">
+        <input type="text" id="limes" placeholder="Lime sizes (S, M, L)">
+        <input type="number" id="remainingTime" placeholder="Remaining time in minutes" min="0">
+
+        <button onclick="calculateTime()">Calculate</button>
+
+        <br><br>
+        <div id="result"></div>
+        <div id="resultToCut"></div>
+
+    </main>
+    <script src="app.js"></script>
+    <script>
+        function calculateTime() {
+            const juice = document.querySelector("#juices").value;
+            const time = timeToMixJuice(juice);
+            document.querySelector("#result").innerHTML = "Time to mix: " + time + " minutes";
+
+            const wedges = document.querySelector("#wedges").value;
+            const limes = document.querySelector("#limes").value;
+            const resultLimes = limesToCut(wedges, limes);
+            document.querySelector("#resultToCut").innerHTML = "Limes to cut: " + resultLimes;
+
+            const remainingTime = document.querySelector("#remainingTime").value;
+            const resultOrders = remainingOrders(remainingTime);
+            document.querySelector("#remainingOrders").innerHTML = "Remaining orders: " + resultOrders.join(", ");
+        }
+    </script>
+</body>
+</html>
